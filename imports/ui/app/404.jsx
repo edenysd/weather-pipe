@@ -1,8 +1,7 @@
-export const Login = () => {
-  console.log("EEE");
+export default () => {
   return (
     <section class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]">
-      <div class="h-full">asdfsadfdasasd</div>
+      <div class="">HsdddddIIII</div>
     </section>
   );
 };
