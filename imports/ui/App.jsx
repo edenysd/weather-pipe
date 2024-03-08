@@ -1,12 +1,4 @@
-import { Hello } from "./Hello";
+import { Hello } from "./app/Login";
 import { Info } from "./Info";
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
-  </div>
-);
-
-
+export const App = ({ children }) => <div>{children}</div>;
