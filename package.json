@@ -23,11 +23,14 @@
     "testModule": "tests/main.js"
   },
   "devDependencies": {
+    "vite": "^4.5.2",
+    "@types/fibers": "3.1.1",
+    "@types/meteor": "2.9.2",
+    "@types/node": "16.4.10",
     "autoprefixer": "^10.4.18",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^3.0.9",
-    "vite-plugin-solid": "^2.3.0",
+    "vite-plugin-solid": "^2.10.1",
     "vite-plugin-solid-svg": "^0.4.1"
   }
 }
