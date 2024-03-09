@@ -18,5 +18,5 @@
       ]
     }
   },
-  "include": ["src", "styled-system"]
+  "include": ["./imports"]
 }
