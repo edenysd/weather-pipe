@@ -21,7 +21,6 @@ export const App = (props) => {
 
   return (
     <>
-      Adasasd
       <div>{props.children}</div>
     </>
   );

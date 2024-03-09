@@ -14,10 +14,7 @@ export const Info = () => {
   });
 
   return (
-    <Show
-      when={isReady()}
-      fallback={<div>Loading...</div>}
-    >
+    <Show when={isReady()} fallback={<div>Loading...</div>}>
       <div>
         <h2>Learn Meteor!</h2>
         <ul>
