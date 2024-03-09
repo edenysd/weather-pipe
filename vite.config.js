@@ -13,7 +13,8 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        "~/": path.resolve(__dirname, "./imports/ui/"),
+        find: "~/",
+        replacement: fileURLToPath(new URL("./imports/ui/", import.meta.url)),
       },
     ],
   },
