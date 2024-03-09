@@ -16,7 +16,8 @@
         "node_modules/@types/meteor/*",
         ".meteor/local/types/packages.d.ts"
       ]
-    }
+    },
+    "lib": ["ES2020", "ESNext", "DOM.Iterable", "DOM"]
   },
   "include": ["./imports"]
 }
