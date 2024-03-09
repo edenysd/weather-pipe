@@ -1,11 +1,22 @@
 {
   "compilerOptions": {
+    /* Bundler mode */
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+
+    "baseUrl": ".",
     "preserveSymlinks": true,
     "paths": {
+      "~/*": ["./imports/ui/*"],
       "meteor/*": [
         "node_modules/@types/meteor/*",
         ".meteor/local/types/packages.d.ts"
       ]
     }
-  }
+  },
+  "include": ["src", "styled-system"]
 }
