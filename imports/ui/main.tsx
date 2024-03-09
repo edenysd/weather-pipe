@@ -4,7 +4,7 @@ import { render } from "solid-js/web";
 
 import Cookies from "js-cookie";
 import { createSignal } from "solid-js";
-import { Login } from "./app/Login";
+import { Login } from "./app/Login/Login";
 import { Router } from "@solidjs/router";
 
 const routes = [
