@@ -35,8 +35,7 @@ const AUTH_VARIANTS_CONFIGS = [
   {
     id: AUTH_VARIANTS.LOG_IN,
     label: "LOG IN",
-    description:
-      "Discover the bigest realtime dashboard of realtime weather data",
+    description: "Discover the bigest dashboard for realtime weather data",
     cta: {
       label: "LOG IN",
       classes: "bg-green-700",
