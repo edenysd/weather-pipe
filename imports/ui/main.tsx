@@ -1,34 +1,8 @@
 /* @refresh reload */
 import { Meteor } from "meteor/meteor";
 import { render } from "solid-js/web";
-
-import Cookies from "js-cookie";
-import { createSignal } from "solid-js";
-import { Login } from "./app/Login/Login";
-import { Router } from "@solidjs/router";
-
-const routes = [
-  {
-    path: "/",
-    component: Login,
-  },
-];
-
-const COOKIE_ID = "lg-user-cookie";
-
-export const App = (props) => {
-  const [token, setToken] = createSignal(Cookies.get(COOKIE_ID));
-
-  return (
-    <>
-      <div>{props.children}</div>
-    </>
-  );
-};
+import { AppRouter } from "./router/router";
 
 Meteor.startup(() => {
-  render(
-    () => <Router root={App}>{routes}</Router>,
-    document.getElementById("root")
-  );
+  render(() => <AppRouter />, document.getElementById("root"));
 });
