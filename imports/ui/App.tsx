@@ -5,6 +5,7 @@ import { tryLogInWithCookies } from "./lib/auth";
 import { useNavigate } from "@solidjs/router";
 
 /**
+ * @important
  * This invocation cause some warnings in SolidJS
  * about possible memory leaks. In the future
  * the toast property needs to by passed using

@@ -17,6 +17,11 @@ export const signUp = async (authInfo: AuthInfo) => {
 };
 
 export const logIn = async (authInfo: AuthInfo) => {
+  /**
+   * @important
+   * Wrap the login method with a Promise to support
+   * async handlers and error caching
+   */
   await new Promise((resolve, reject) => {
     Meteor.loginWithPassword(
       { username: authInfo.username },
