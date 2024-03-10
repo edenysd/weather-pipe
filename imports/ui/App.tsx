@@ -4,6 +4,7 @@ import * as Toast from "~/components/toast";
 import { tryLogInWithCookies } from "./lib/auth";
 import { useNavigate } from "@solidjs/router";
 import { FaSolidXmark } from "solid-icons/fa";
+
 /**
  * @important
  * This invocation cause some warnings in SolidJS
