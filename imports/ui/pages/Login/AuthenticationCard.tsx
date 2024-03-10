@@ -10,6 +10,7 @@ import { cx } from "~/lib/create-style-context";
 import { toast } from "~/App";
 import { Meteor } from "meteor/meteor";
 import { useNavigate } from "@solidjs/router";
+import { FaSolidShieldHalved } from "solid-icons/fa";
 
 /**
  * Need to manually create enum-like object
@@ -114,7 +115,8 @@ export const SignUpCard = () => {
                 <FormLabel class="text-red-700">{error()}</FormLabel>
               </form>
             </Card.Body>
-            <Card.Footer>
+            <Card.Footer class="flex justify-between items-center">
+              <FaSolidShieldHalved size={24} />
               <Button
                 disabled={loading()}
                 class={cx(option.cta.classes, "relative w-1/3")}
