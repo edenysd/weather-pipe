@@ -13,6 +13,7 @@
     "@solidjs/router": "^0.13.0",
     "js-cookie": "^3.0.5",
     "meteor-node-stubs": "^1.2.7",
+    "solid-icons": "^1.1.0",
     "solid-js": "^1.8.6",
     "tailwind-variants": "^0.2.0"
   },
