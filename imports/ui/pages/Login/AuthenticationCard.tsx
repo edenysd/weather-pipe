@@ -7,6 +7,9 @@ import { Input } from "~/components/input";
 import { AuthInfo, logIn, signUp } from "~/lib/auth";
 import { formToJson } from "~/lib/utils";
 import { cx } from "~/lib/create-style-context";
+import { toast } from "~/App";
+import { Meteor } from "meteor/meteor";
+import { useNavigate } from "@solidjs/router";
 
 /**
  * Need to manually create enum-like object
@@ -41,21 +44,29 @@ const AUTH_VARIANTS_CONFIGS = [
 ];
 
 export const SignUpCard = () => {
+  const navigate = useNavigate();
   const [error, setError] = createSignal("");
   const [loading, setLoading] = createSignal(false);
 
   const handleAuthentication = async (event: SubmitEvent, action: string) => {
     event.preventDefault();
     if (loading()) return;
-
+    setLoading(true);
     const authInfo = formToJson(event.target as HTMLFormElement) as AuthInfo;
     try {
       if (action == AUTH_VARIANTS.SIGN_UP) {
         await signUp(authInfo);
       }
       await logIn(authInfo);
+      toast().create({
+        title: "Welcome!",
+        description: `Feel free to reach out ${Meteor.user().username}`,
+      });
+      navigate("/home");
     } catch (error) {
       setError(error.reason);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,7 +85,7 @@ export const SignUpCard = () => {
           <Card.Description class="text-base">
             {AUTH_VARIANTS_CONFIGS.map((auth_variant) => (
               <Tabs.Content value={auth_variant.id}>
-                {auth_variant.description}
+                <div class="h-12">{auth_variant.description}</div>
               </Tabs.Content>
             ))}
           </Card.Description>
@@ -105,10 +116,21 @@ export const SignUpCard = () => {
             </Card.Body>
             <Card.Footer>
               <Button
+                disabled={loading()}
                 class={cx(option.cta.classes, "relative w-1/3")}
                 form={option.id}
                 formAction="submit"
               >
+                {/* Spinner */}
+                {loading() && (
+                  <div
+                    class={cx(
+                      "h-7 w-7 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                    )}
+                    role="status"
+                  />
+                )}
+                {/* Ping */}
                 <span class="absolute flex h-4 w-4 -right-1 -top-1">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-4 w-4 bg-yellow-500"></span>
