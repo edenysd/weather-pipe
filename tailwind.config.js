@@ -10,7 +10,11 @@ module.exports = {
   ],
   plugins: [parkwindPlugin, flowbite],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        accent: "var(--accent)",
+      },
+    },
   },
   darkMode: "class",
 };
