@@ -1,5 +1,6 @@
-const { Accounts } = require("meteor/accounts-base");
 import { Meteor } from "meteor/meteor";
+const { Accounts } = require("meteor/accounts-base");
+import Cookies from "js-cookie";
 
 export type AuthInfo = { username: string; password: string };
 
@@ -16,20 +17,36 @@ export const signUp = async (authInfo: AuthInfo) => {
 };
 
 export const logIn = async (authInfo: AuthInfo) => {
-  Meteor.loginWithPassword(
-    { username: authInfo.username },
-    authInfo.password,
-    (error) => {
-      if (!error) {
-        //@todo LOGIC for saved keys
-      } else {
-        return {
-          reason: error.reason,
-          error: error.error,
-        };
+  await new Promise((resolve, reject) => {
+    Meteor.loginWithPassword(
+      { username: authInfo.username },
+      authInfo.password,
+      (error) => {
+        if (!error) {
+          saveCookies(authInfo);
+          resolve(undefined);
+        } else {
+          reject({
+            reason: error.reason,
+            error: error.error,
+          });
+        }
       }
-    }
-  );
+    );
+  });
 };
 
-export const tryLogInWithCookies = () => {};
+const COOKIE_PREFIX = "wheater-";
+
+export const tryLogInWithCookies = async () => {
+  const authInfo: AuthInfo = {
+    password: Cookies.get(COOKIE_PREFIX + "password"),
+    username: Cookies.get(COOKIE_PREFIX + "username"),
+  };
+  return await logIn(authInfo);
+};
+
+export const saveCookies = (authInfo: AuthInfo) => {
+  Cookies.set(COOKIE_PREFIX + "password", authInfo.password);
+  Cookies.set(COOKIE_PREFIX + "username", authInfo.username);
+};
