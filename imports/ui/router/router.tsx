@@ -1,8 +1,7 @@
-import { HashRouter as Router } from "@solidjs/router";
+import { HashRouter as Router, useNavigate } from "@solidjs/router";
 import { App } from "~/App";
 import { NotFound } from "~/pages/404";
 import { Dashboard } from "~/pages/Home/Dashboard/Dashboard";
-import { Home } from "~/pages/Home/Home";
 import { HomeLayout } from "~/pages/Home/HomeLayout";
 import { Login } from "~/pages/Login/Login";
 
@@ -15,6 +14,10 @@ const routes = [
     path: "/home",
     component: HomeLayout,
     children: [
+      {
+        path: "/",
+        component: Dashboard,
+      },
       {
         path: "/dashboard",
         component: Dashboard,
