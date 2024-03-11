@@ -23,6 +23,8 @@ export const HomeLayout = (props) => {
     }
   });
 
+  if (!Meteor.user()) return null;
+
   return (
     <>
       <SideBar>
