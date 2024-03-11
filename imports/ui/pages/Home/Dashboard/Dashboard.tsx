@@ -4,6 +4,7 @@ import * as Card from "~/components/card";
 import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { cx } from "~/lib/create-style-context";
+import { OLMapDashboard } from "./OLMapDashboard";
 
 export const Dashboard = (props) => {
   const [draftNewLocation, setDraftNewLocation] = createSignal(false);
@@ -41,7 +42,9 @@ export const Dashboard = (props) => {
           <Card.Title>Add new location</Card.Title>
         </Card.Header>
         <Card.Body class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          <div class="min-h-[400px]">MAP</div>
+          <div class="min-h-[400px]">
+            <OLMapDashboard />
+          </div>
           <div>
             <div class="grid grid-cols-1 gap-4">
               <div>
