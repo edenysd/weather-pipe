@@ -29,17 +29,22 @@ export const [Toaster, toast] = createToaster({
 });
 
 export const App = (props) => {
+  const [loading, setLoading] = createSignal(true);
   const navigate = useNavigate();
   const location = useLocation();
 
   const pathname = createMemo(() => location.pathname);
 
-  const [loading, setLoading] = createSignal(true);
   onMount(async () => {
     // Global policy for relogin using cached data
-    if (!Meteor.user() && pathname() === "/") {
-      navigate("/home");
+    if (Meteor.user()) {
+      if (pathname() === "/") {
+        navigate("/home");
+      }
+      setLoading(false);
+      return;
     }
+
     try {
       await tryLogInWithCookies();
       if (pathname() === "/") {
