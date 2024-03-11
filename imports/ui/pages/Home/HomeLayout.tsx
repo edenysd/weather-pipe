@@ -25,9 +25,10 @@ export const HomeLayout = (props) => {
 
   return (
     <>
-      <NavBar />
-      <SideBar />
-      <div>{props.children}</div>
+      <SideBar>
+        <NavBar />
+        <div>{props.children}</div>
+      </SideBar>
     </>
   );
 };

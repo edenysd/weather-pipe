@@ -9,7 +9,7 @@ const paths = [
   { path: "/home/map", label: "Wheater Map" },
 ];
 
-export const SideBar = () => {
+export const SideBar = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -50,6 +50,7 @@ export const SideBar = () => {
           </SegmentGroup.Root>
         </div>
       </aside>
+      <div class="sm:ml-64">{props.children}</div>
     </>
   );
 };
