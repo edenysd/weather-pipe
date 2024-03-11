@@ -41,6 +41,27 @@ export const logIn = async (authInfo: AuthInfo) => {
   });
 };
 
+export const logOut = async () => {
+  /**
+   * @important
+   * Wrap the login method with a Promise to support
+   * async handlers and error caching
+   */
+  await new Promise((resolve, reject) => {
+    Meteor.logout((error) => {
+      if (!error) {
+        removeCookies();
+        resolve(undefined);
+      } else {
+        reject({
+          reason: error.reason,
+          error: error.error,
+        });
+      }
+    });
+  });
+};
+
 const COOKIE_PREFIX = "wheater-";
 
 export const tryLogInWithCookies = async () => {
@@ -54,4 +75,8 @@ export const tryLogInWithCookies = async () => {
 export const saveCookies = (authInfo: AuthInfo) => {
   Cookies.set(COOKIE_PREFIX + "password", authInfo.password);
   Cookies.set(COOKIE_PREFIX + "username", authInfo.username);
+};
+export const removeCookies = () => {
+  Cookies.remove(COOKIE_PREFIX + "password");
+  Cookies.remove(COOKIE_PREFIX + "username");
 };
