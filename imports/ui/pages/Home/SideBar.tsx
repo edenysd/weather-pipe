@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "@solidjs/router";
 import { createMemo } from "solid-js";
 
 const paths = [
-  { path: "/home", label: "Dashboard" },
+  { path: "/home/dashboard", label: "Dashboard" },
   { path: "/home/map", label: "Wheater Map" },
 ];
 
