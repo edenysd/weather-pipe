@@ -3,10 +3,12 @@ import "flowbite";
 import { WiDust } from "solid-icons/wi";
 import { useLocation, useNavigate } from "@solidjs/router";
 import { createMemo } from "solid-js";
+import { FaSolidChartArea } from "solid-icons/fa";
+import { FaSolidMap } from "solid-icons/fa";
 
 const paths = [
-  { path: "/home/dashboard", label: "Dashboard" },
-  { path: "/home/map", label: "Wheater Map" },
+  { path: "/home/dashboard", label: "Dashboard", icon: FaSolidChartArea },
+  { path: "/home/map", label: "Wheater Map", icon: FaSolidMap },
 ];
 
 export const SideBar = (props) => {
@@ -40,7 +42,8 @@ export const SideBar = (props) => {
                 class="w-full"
                 value={option.path}
               >
-                <SegmentGroup.ItemText class="flex">
+                <SegmentGroup.ItemText class="flex items-center gap-4">
+                  <option.icon size={20} />
                   {option.label}
                 </SegmentGroup.ItemText>
                 <SegmentGroup.ItemControl />
