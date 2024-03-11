@@ -11,11 +11,13 @@ export const HomeLayout = (props) => {
   const pathname = createMemo(() => location.pathname);
 
   onMount(async () => {
+    // Send unauthenticated users to login page
     if (!Meteor.user()) {
       navigate("/");
       return;
     }
-    //Redirect
+
+    //Redirect /dashboard
     if (pathname() === "/home") {
       navigate("dashboard");
     }
