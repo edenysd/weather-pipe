@@ -2,8 +2,9 @@ import { createToaster } from "@ark-ui/solid";
 import { createSignal, onMount } from "solid-js";
 import * as Toast from "~/components/toast";
 import { tryLogInWithCookies } from "./lib/auth";
-import { useNavigate } from "@solidjs/router";
+import { useLocation, useNavigate } from "@solidjs/router";
 import { FaSolidXmark } from "solid-icons/fa";
+import { createMemo } from "solid-js";
 
 /**
  * @important
@@ -29,13 +30,26 @@ export const [Toaster, toast] = createToaster({
 
 export const App = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const pathname = createMemo(() => location.pathname);
+
   const [loading, setLoading] = createSignal(true);
   onMount(async () => {
+    // Global policy for relogin using cached data
+    if (!Meteor.user() && pathname() === "/") {
+      navigate("/home");
+    }
     try {
       await tryLogInWithCookies();
-      navigate("/home");
+      if (pathname() === "/") {
+        navigate("/home");
+      }
+    } catch {
+      navigate("/");
+    } finally {
       setLoading(false);
-    } catch {}
+    }
   });
 
   return (
