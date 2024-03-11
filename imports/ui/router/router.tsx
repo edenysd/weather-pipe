@@ -1,4 +1,4 @@
-import { Router } from "@solidjs/router";
+import { HashRouter as Router } from "@solidjs/router";
 import { App } from "~/App";
 import { NotFound } from "~/pages/404";
 import { Home } from "~/pages/Home/Home";
@@ -18,14 +18,10 @@ const routes = [
         path: "/",
         component: Home,
       },
-      // {
-      //   path: "/settings",
-      //   component: lazy(() => import("/pages/users/[id]/settings.js")),
-      // },
-      // {
-      //   path: "/*all",
-      //   component: lazy(() => import("/pages/users/[id]/[...all].js")),
-      // },
+      {
+        path: "/map",
+        component: Home,
+      },
     ],
   },
   {
