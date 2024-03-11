@@ -46,7 +46,7 @@ export const SideBar = () => {
                 <SegmentGroup.ItemControl />
               </SegmentGroup.Item>
             ))}
-            <SegmentGroup.Indicator />
+            <SegmentGroup.Indicator class="-right-[1px]" />
           </SegmentGroup.Root>
         </div>
       </aside>
