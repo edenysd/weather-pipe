@@ -1,5 +1,5 @@
 import { createToaster } from "@ark-ui/solid";
-import { onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import * as Toast from "~/components/toast";
 import { tryLogInWithCookies } from "./lib/auth";
 import { useNavigate } from "@solidjs/router";
@@ -29,18 +29,33 @@ export const [Toaster, toast] = createToaster({
 
 export const App = (props) => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = createSignal(true);
   onMount(async () => {
     try {
       await tryLogInWithCookies();
       navigate("/home");
+      setLoading(false);
     } catch {}
   });
 
   return (
     <>
-      <div>{props.children}</div>
-      <Toaster />
+      {loading() ? (
+        <div class="h-screen w-screen flex items-center justify-center text-4xl">
+          <h1 class="relative flex items-center justify-center gap-4">
+            {/* Ping */}
+            <span class="relative flex h-7 w-7 justify-center items-center">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-5 w-5 bg-black"></span>
+            </span>
+          </h1>
+        </div>
+      ) : (
+        <>
+          <div>{props.children}</div>
+          <Toaster />
+        </>
+      )}
     </>
   );
 };
