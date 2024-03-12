@@ -16,14 +16,11 @@ export const WeatherMapCard = () => {
       <Card.Header>
         <Card.Title>Add new location</Card.Title>
       </Card.Header>
-      <Card.Body class="w-full h-full grid grid-cols-1 gap-8">
+      <Card.Body class="w-full h-full grid grid-cols-1 p-0">
         <div class="h-full">
           <OLMapDashboard layer={layer} />
         </div>
       </Card.Body>
-      <Card.Footer class="flex justify-between items-center">
-        <Button type="submit">ADD LOCATION</Button>
-      </Card.Footer>
     </Card.Root>
   );
 };
