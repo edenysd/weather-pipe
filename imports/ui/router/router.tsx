@@ -3,6 +3,7 @@ import { App } from "~/App";
 import { NotFound } from "~/pages/404";
 import { Dashboard } from "~/pages/Home/Dashboard/Dashboard";
 import { HomeLayout } from "~/pages/Home/HomeLayout";
+import { WeatherMap } from "~/pages/Home/WeatherMap/WeatherMap";
 import { Login } from "~/pages/Login/Login";
 
 const routes = [
@@ -23,8 +24,8 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "/map",
-        component: Dashboard,
+        path: "/weather-map",
+        component: WeatherMap,
       },
     ],
   },

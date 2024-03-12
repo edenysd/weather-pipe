@@ -8,7 +8,7 @@ import { FaSolidMap } from "solid-icons/fa";
 
 const paths = [
   { path: "/home/dashboard", label: "Dashboard", icon: FaSolidChartArea },
-  { path: "/home/map", label: "Wheater Map", icon: FaSolidMap },
+  { path: "/home/weather-map", label: "Wheater Map", icon: FaSolidMap },
 ];
 
 export const SideBar = (props) => {
@@ -53,7 +53,7 @@ export const SideBar = (props) => {
           </SegmentGroup.Root>
         </div>
       </aside>
-      <div class="sm:ml-64">{props.children}</div>
+      <div class="sm:ml-64 h-full relative flex flex-col">{props.children}</div>
     </>
   );
 };
