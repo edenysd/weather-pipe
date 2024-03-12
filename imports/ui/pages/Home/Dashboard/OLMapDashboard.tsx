@@ -1,7 +1,7 @@
 import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
-import XYZ from "ol/source/XYZ";
+import OSM from "ol/source/OSM";
 import { createEffect, onMount } from "solid-js";
 import { defaults as ControlDefaults } from "ol/control";
 import { defaults as InteractionDefaults } from "ol/interaction";
@@ -29,9 +29,7 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
       target: "map-dashboard",
       layers: [
         new TileLayer({
-          source: new XYZ({
-            url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-          }),
+          source: new OSM(),
         }),
       ],
       view: new View({
