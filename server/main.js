@@ -2,6 +2,7 @@ import { Meteor } from "meteor/meteor";
 import { LinksCollection } from "/imports/api/links";
 import { startMethodMap } from "/imports/api/methods/map";
 import { createOWTimer } from "/imports/api/timers/OWTimer";
+import { publishDashboard } from "/imports/api/publications/example";
 
 async function insertLink({ title, url }) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
@@ -40,3 +41,4 @@ Meteor.startup(async () => {
 
 startMethodMap();
 createOWTimer();
+publishDashboard();
