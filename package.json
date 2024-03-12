@@ -16,6 +16,7 @@
     "js-cookie": "^3.0.5",
     "meteor-node-stubs": "^1.2.7",
     "ol": "^9.0.0",
+    "simpl-schema": "^3.4.6",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.8.6",
     "tailwind-variants": "^0.2.0"
