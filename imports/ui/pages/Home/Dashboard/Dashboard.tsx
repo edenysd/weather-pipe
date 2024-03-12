@@ -8,6 +8,8 @@ import { OLMapDashboard } from "./OLMapDashboard";
 
 export const Dashboard = (props) => {
   const [draftNewLocation, setDraftNewLocation] = createSignal(false);
+  const [lat, setLat] = createSignal(0);
+  const [lng, setLng] = createSignal(0);
 
   return (
     <div class="w-full h-full flex flex-col items-center p-8 gap-8">
@@ -43,7 +45,12 @@ export const Dashboard = (props) => {
         </Card.Header>
         <Card.Body class="grid grid-cols-1 xl:grid-cols-2 gap-8">
           <div class="min-h-[400px]">
-            <OLMapDashboard />
+            <OLMapDashboard
+              lat={lat}
+              lng={lng}
+              setLat={setLat}
+              setLng={setLng}
+            />
           </div>
           <div>
             <div class="grid grid-cols-1 gap-4">
@@ -54,11 +61,21 @@ export const Dashboard = (props) => {
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <FormLabel>Lat</FormLabel>
-                  <Input placeholder="Location latitude" />
+                  <Input
+                    type="number"
+                    value={lat()}
+                    onChange={(e) => setLat(e.target.value)}
+                    placeholder="Location latitude"
+                  />
                 </div>
                 <div>
                   <FormLabel>Lng</FormLabel>
-                  <Input placeholder="Location longitude" />
+                  <Input
+                    type="number"
+                    value={lng()}
+                    onChange={(e) => setLng(e.target.value)}
+                    placeholder="Location longitude"
+                  />
                 </div>
               </div>
             </div>

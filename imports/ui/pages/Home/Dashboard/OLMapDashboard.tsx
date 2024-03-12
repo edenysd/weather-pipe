@@ -2,13 +2,22 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
-import { onMount } from "solid-js";
+import { createEffect, onMount } from "solid-js";
 import { defaults as ControlDefaults } from "ol/control";
 import { defaults as InteractionDefaults } from "ol/interaction";
 import { Overlay } from "ol";
 import { FaSolidMarker } from "solid-icons/fa";
+import { useGeographic } from "ol/proj";
 
-export const OLMapDashboard = (props) => {
+useGeographic();
+export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
+  let overlayRef = null;
+
+  createEffect(() => {
+    const coordinate = [lat(), lng()];
+    overlayRef?.setPosition(coordinate);
+  });
+
   onMount(() => {
     const controls = ControlDefaults({ rotate: false });
     const interactions = InteractionDefaults({
@@ -35,19 +44,21 @@ export const OLMapDashboard = (props) => {
 
     const markerElement = document.getElementById("marker");
 
-    var overlay = new Overlay({
+    overlayRef = new Overlay({
       element: markerElement,
       autoPan: true,
       position: [0, 0],
     });
 
-    map.addOverlay(overlay);
+    map.addOverlay(overlayRef);
     map.on("singleclick", function (event) {
       if (event.pixel) {
         var coordinate = event.coordinate;
-        overlay.setPosition(coordinate);
+        overlayRef.setPosition(coordinate);
+        setLat(coordinate[0]);
+        setLng(coordinate[1]);
       } else {
-        overlay.setPosition(undefined);
+        overlayRef.setPosition(undefined);
       }
     });
   });
