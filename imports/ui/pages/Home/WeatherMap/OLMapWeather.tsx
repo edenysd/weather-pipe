@@ -35,6 +35,7 @@ export const OLMapDashboard = ({ layer }) => {
         center: [0, 0],
         zoom: 2,
         extent: [-180, -85, 180, 85],
+        maxZoom: 10,
       }),
       controls,
       interactions,
