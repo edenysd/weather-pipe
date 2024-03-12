@@ -29,7 +29,7 @@ export const HomeLayout = (props) => {
     <>
       <SideBar>
         <NavBar />
-        <div>{props.children}</div>
+        <div class="w-full h-full">{props.children}</div>
       </SideBar>
     </>
   );
