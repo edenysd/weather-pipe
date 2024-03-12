@@ -14,6 +14,16 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
     value: "",
     error: "",
   });
+
+  const clearFields = () => {
+    setLat(0);
+    setLng(0);
+    setLocationName({
+      value: "",
+      error: "",
+    });
+  };
+
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
     if (!locationName().value) {
@@ -22,6 +32,7 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
         error: "Name field is required",
       }));
     }
+    clearFields();
   };
   return (
     <Card.Root
