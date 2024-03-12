@@ -1,3 +1,4 @@
+import { Meteor } from "meteor/meteor";
 import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
@@ -6,6 +7,7 @@ import { createEffect, onMount } from "solid-js";
 import { defaults as ControlDefaults } from "ol/control";
 import { defaults as InteractionDefaults } from "ol/interaction";
 import { useGeographic } from "ol/proj";
+import TileState from "ol/TileState";
 
 useGeographic();
 export const OLMapDashboard = ({ layer }) => {
@@ -28,7 +30,16 @@ export const OLMapDashboard = ({ layer }) => {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            url: "{x}{y}{z}",
+            tileLoadFunction(tile, src) {
+              Meteor.callAsync("map", { tileCoord: tile.tileCoord })
+                .then((data) => {
+                  tile.getImage().src = data;
+                })
+                .catch((e) => {
+                  tile.setState(TileState.ERROR);
+                });
+            },
           }),
         }),
       ],
