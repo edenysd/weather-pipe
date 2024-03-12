@@ -69,7 +69,6 @@ export const OLMapDashboard = ({ layer }) => {
       if (!nextTile) return;
 
       nextTile.handler();
-      console.log(mapRef.getView().getZoom(), nextTile.coord);
     }, 1000);
   });
 

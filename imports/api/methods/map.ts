@@ -10,7 +10,7 @@ export const startMethodMap = () => {
           "Please log in to call this method"
         );
       }
-      console.log(i++);
+
       if (tileCoord?.length !== 3) {
         throw new Meteor.Error(
           "validation-error",
@@ -35,7 +35,6 @@ export const startMethodMap = () => {
           Buffer.from(response.data, "binary").toString("base64")
         );
       } catch (e) {
-        console.log(e);
         throw new Meteor.Error("tile-error", "failed to fetch tile");
       }
     },
