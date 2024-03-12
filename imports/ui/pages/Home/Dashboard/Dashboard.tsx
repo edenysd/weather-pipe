@@ -5,6 +5,7 @@ import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { cx } from "~/lib/create-style-context";
 import { OLMapDashboard } from "./OLMapDashboard";
+import { parseFloatAndClamp } from "~/lib/utils";
 
 export const Dashboard = (props) => {
   const [draftNewLocation, setDraftNewLocation] = createSignal(false);
@@ -63,17 +64,27 @@ export const Dashboard = (props) => {
                   <FormLabel>Lat</FormLabel>
                   <Input
                     type="number"
+                    min={-180}
+                    max={180}
                     value={lat()}
-                    onChange={(e) => setLat(e.target.value)}
+                    onChange={(e) =>
+                      setLat(parseFloatAndClamp(e.target.value, -180, 180))
+                    }
                     placeholder="Location latitude"
                   />
                 </div>
                 <div>
                   <FormLabel>Lng</FormLabel>
                   <Input
+                    min={-85}
+                    max={85}
                     type="number"
                     value={lng()}
-                    onChange={(e) => setLng(e.target.value)}
+                    onChange={(e) =>
+                      setLng(
+                        setLng(parseFloatAndClamp(e.target.value, -85, 85))
+                      )
+                    }
                     placeholder="Location longitude"
                   />
                 </div>

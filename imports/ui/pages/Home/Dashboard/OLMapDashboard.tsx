@@ -37,6 +37,7 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
       view: new View({
         center: [0, 0],
         zoom: 2,
+        extent: [-180, -85, 180, 85],
       }),
       controls,
       interactions,
