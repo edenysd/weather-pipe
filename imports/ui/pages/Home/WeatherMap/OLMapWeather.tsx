@@ -23,6 +23,7 @@ export const OLMapDashboard = ({ layer }) => {
     });
 
     const map = new Map({
+      maxTilesLoading: 1,
       target: "map-dashboard",
       layers: [
         new TileLayer({
