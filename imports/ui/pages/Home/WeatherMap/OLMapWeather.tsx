@@ -3,7 +3,7 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
-import { createEffect, onMount } from "solid-js";
+import { createEffect, onCleanup, onMount } from "solid-js";
 import { defaults as ControlDefaults } from "ol/control";
 import { defaults as InteractionDefaults } from "ol/interaction";
 import { useGeographic } from "ol/proj";
@@ -12,6 +12,10 @@ import TileState from "ol/TileState";
 useGeographic();
 export const OLMapDashboard = ({ layer }) => {
   let layerRef = null;
+  let mapRef: Map = null;
+  let intervalId = null;
+  let curPendingRequestTiles: { handler: Function; coord: Array<number> }[] =
+    [];
 
   createEffect(() => {
     layerRef = layer();
@@ -24,7 +28,7 @@ export const OLMapDashboard = ({ layer }) => {
       pinchRotate: false,
     });
 
-    const map = new Map({
+    mapRef = new Map({
       maxTilesLoading: 1,
       target: "map-dashboard",
       layers: [
@@ -32,13 +36,18 @@ export const OLMapDashboard = ({ layer }) => {
           source: new XYZ({
             url: "{x}{y}{z}",
             tileLoadFunction(tile, src) {
-              Meteor.callAsync("map", { tileCoord: tile.tileCoord })
-                .then((data) => {
-                  tile.getImage().src = data;
-                })
-                .catch((e) => {
-                  tile.setState(TileState.ERROR);
-                });
+              curPendingRequestTiles.push({
+                coord: tile.tileCoord,
+                handler: () => {
+                  Meteor.callAsync("map", { tileCoord: tile.tileCoord })
+                    .then((data) => {
+                      tile.getImage().src = data;
+                    })
+                    .catch((e) => {
+                      tile.setState(TileState.ERROR);
+                    });
+                },
+              });
             },
           }),
         }),
@@ -53,6 +62,22 @@ export const OLMapDashboard = ({ layer }) => {
       interactions,
     });
   });
+
+  onMount(() => {
+    intervalId = setInterval(() => {
+      const nextTile = curPendingRequestTiles.pop();
+      if (!nextTile) return;
+
+      nextTile.handler();
+      console.log(mapRef.getView().getZoom(), nextTile.coord);
+    }, 1000);
+  });
+
+  onCleanup(() => {
+    clearInterval(intervalId);
+    mapRef.setTarget(null);
+  });
+
   return (
     <div class="w-full h-full relative">
       <div id="map-dashboard" class="w-full h-full"></div>
