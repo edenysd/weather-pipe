@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-import '@park-ui/tailwind-plugin/preset.css'
+@import "./ol.css";
+
+import "@park-ui/tailwind-plugin/preset.css"
 
 body {
   font-family: sans-serif;
