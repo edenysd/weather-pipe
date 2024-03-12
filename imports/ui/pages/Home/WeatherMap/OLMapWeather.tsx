@@ -41,6 +41,7 @@ export const OLMapDashboard = ({ layer }) => {
                 handler: () => {
                   Meteor.callAsync("map", { tileCoord: tile.tileCoord })
                     .then((data) => {
+                      //@ts-ignore problem with XYZ source definition
                       tile.getImage().src = data;
                     })
                     .catch((e) => {
