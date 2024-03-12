@@ -47,6 +47,7 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
       element: markerElement,
       autoPan: true,
       position: [0, 0],
+      stopEvent: false,
     });
 
     map.addOverlay(overlayRef);
@@ -64,11 +65,7 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
   return (
     <div class="w-full h-full relative">
       <div id="map-dashboard" class="w-full h-full"></div>
-      <FaSolidMarker
-        class="-translate-y-full pointer-events-none"
-        size={24}
-        id="marker"
-      />
+      <FaSolidMarker class="-translate-y-full" size={24} id="marker" />
     </div>
   );
 };
