@@ -1,5 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { LinksCollection } from "/imports/api/links";
+import { startMethodMap } from "/imports/api/methods/map.ts";
 
 async function insertLink({ title, url }) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
@@ -35,3 +36,5 @@ Meteor.startup(async () => {
     return LinksCollection.find();
   });
 });
+
+startMethodMap();
