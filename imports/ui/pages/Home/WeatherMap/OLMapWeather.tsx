@@ -11,14 +11,18 @@ import TileState from "ol/TileState";
 
 useGeographic();
 export const OLMapDashboard = ({ layer }) => {
-  let layerRef = null;
-  let mapRef: Map = null;
+  let layerRef = { current: null };
+  let mapRef: { current: Map } = { current: null };
   let intervalId = null;
   let curPendingRequestTiles: { handler: Function; coord: Array<number> }[] =
     [];
 
   createEffect(() => {
-    layerRef = layer();
+    layerRef.current = layer();
+    curPendingRequestTiles = [];
+    if (mapRef.current) {
+      mapRef.current.getAllLayers()[0].getSource().refresh();
+    }
   });
 
   onMount(() => {
@@ -28,7 +32,7 @@ export const OLMapDashboard = ({ layer }) => {
       pinchRotate: false,
     });
 
-    mapRef = new Map({
+    mapRef.current = new Map({
       maxTilesLoading: 1,
       target: "map-dashboard",
       layers: [
@@ -39,7 +43,10 @@ export const OLMapDashboard = ({ layer }) => {
               curPendingRequestTiles.push({
                 coord: tile.tileCoord,
                 handler: () => {
-                  Meteor.callAsync("map", { tileCoord: tile.tileCoord })
+                  Meteor.callAsync("map", {
+                    tileCoord: tile.tileCoord,
+                    layer: layerRef.current,
+                  })
                     .then((data) => {
                       //@ts-ignore problem with XYZ source definition
                       tile.getImage().src = data;
@@ -68,7 +75,6 @@ export const OLMapDashboard = ({ layer }) => {
     intervalId = setInterval(() => {
       const nextTile = curPendingRequestTiles.pop();
       if (!nextTile) return;
-
       nextTile.handler();
     }, 1000);
   });
