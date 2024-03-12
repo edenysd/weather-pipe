@@ -5,6 +5,8 @@ import XYZ from "ol/source/XYZ";
 import { onMount } from "solid-js";
 import { defaults as ControlDefaults } from "ol/control";
 import { defaults as InteractionDefaults } from "ol/interaction";
+import { Overlay } from "ol";
+import { FaSolidMarker } from "solid-icons/fa";
 
 export const OLMapDashboard = (props) => {
   onMount(() => {
@@ -30,6 +32,33 @@ export const OLMapDashboard = (props) => {
       controls,
       interactions,
     });
+
+    const markerElement = document.getElementById("marker");
+
+    var overlay = new Overlay({
+      element: markerElement,
+      autoPan: true,
+      position: [0, 0],
+    });
+
+    map.addOverlay(overlay);
+    map.on("singleclick", function (event) {
+      if (event.pixel) {
+        var coordinate = event.coordinate;
+        overlay.setPosition(coordinate);
+      } else {
+        overlay.setPosition(undefined);
+      }
+    });
   });
-  return <div id="map-dashboard" class="w-full h-full"></div>;
+  return (
+    <div class="w-full h-full relative">
+      <div id="map-dashboard" class="w-full h-full"></div>
+      <FaSolidMarker
+        class="-translate-y-full pointer-events-none"
+        size={24}
+        id="marker"
+      />
+    </div>
+  );
 };
