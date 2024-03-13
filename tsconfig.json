@@ -3,10 +3,10 @@
     /* Bundler mode */
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
+    "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "target": "ES2015",
 
     "baseUrl": ".",
     "preserveSymlinks": true,
