@@ -12,3 +12,24 @@ UserPreferences.schema = new SimpleSchema({
   order: { type: Number, defaultValue: 0, optional: true },
   wideValue: { type: Number, defaultValue: 1, optional: true },
 });
+
+export const getNextOrderValue = ({ userId }) => {
+  const orderArr = UserPreferences.find(
+    { userId },
+    {
+      fields: {
+        _id: 0,
+        order: 1,
+      },
+    }
+  )
+    .fetch()
+    .map((preferemce) => preferemce.order);
+
+  const nextOrderValue =
+    orderArr.reduce((a, b) => Math.max(a || 0, b || 0), {
+      order: 0,
+    }) + 1;
+
+  return nextOrderValue;
+};

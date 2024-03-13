@@ -1,5 +1,8 @@
 import { check } from "meteor/check";
-import { UserPreferences } from "../collections/UserPreferences";
+import {
+  UserPreferences,
+  getNextOrderValue,
+} from "../collections/UserPreferences";
 import { Meteor } from "meteor/meteor";
 import { updateLocationData } from "../collections/LocationsData";
 
@@ -19,12 +22,14 @@ export const startMethodAddLocation = () => {
 
       try {
         const locationId = await updateLocationData({ lat, lng });
+
         const draftUserPreference = {
           userId: this.userId,
           name,
           lat,
           lng,
           locationId,
+          order: getNextOrderValue({ userId: this.userId }),
         };
 
         UserPreferences.insert(draftUserPreference);
