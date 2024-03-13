@@ -6,6 +6,7 @@ import { OLMapDashboard } from "./OLMapDashboard";
 import { parseFloatAndClamp } from "~/lib/utils";
 import { Button } from "~/components/button";
 import { createSignal } from "solid-js";
+import { Meteor } from "meteor/meteor";
 
 export const CreateNewLocationCard = ({ draftNewLocation }) => {
   const [lat, setLat] = createSignal(0);
@@ -24,7 +25,7 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
     });
   };
 
-  const handleSubmit = (e: SubmitEvent) => {
+  const handleSubmit = async (e: SubmitEvent) => {
     e.preventDefault();
     if (!locationName().value) {
       setLocationName((oldVal) => ({
@@ -32,6 +33,12 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
         error: "Name field is required",
       }));
     }
+
+    const response = await Meteor.callAsync("add-location", {
+      name: locationName().value,
+      lat: lat(),
+      lng: lng(),
+    });
     clearFields();
   };
   return (
