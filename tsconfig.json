@@ -2,11 +2,11 @@
   "compilerOptions": {
     /* Bundler mode */
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
+    "target": "ES2015",
 
     "baseUrl": ".",
     "preserveSymlinks": true,
