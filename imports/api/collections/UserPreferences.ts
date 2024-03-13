@@ -10,7 +10,6 @@ UserPreferences.schema = new SimpleSchema({
   userId: { type: String },
   locationId: { type: String, defaultValue: "" },
   order: { type: Number, defaultValue: 0, optional: true },
-  wideValue: { type: Number, defaultValue: 1, optional: true },
 });
 
 export const getNextOrderValue = ({ userId }) => {
