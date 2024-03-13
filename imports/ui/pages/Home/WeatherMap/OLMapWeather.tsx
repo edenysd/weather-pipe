@@ -62,10 +62,10 @@ export const OLMapDashboard = ({ layer }) => {
       ],
       view: new View({
         center: [0, 0],
-        zoom: 4,
+        zoom: 2,
         extent: [-180, -85, 180, 85],
         maxZoom: 9,
-        minZoom: 4,
+        minZoom: 1,
         constrainResolution: true,
       }),
       controls,
