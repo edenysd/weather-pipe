@@ -60,9 +60,11 @@ export const LocationCard = ({ preference }) => {
             {preference().current?.name}
           </div>
         </div>
-        <div class="flex items-center justify-center w-full p-4">
+        <div class="flex items-center justify-evenly w-full p-4">
           <Index each={forecastedList()} fallback={"-"}>
-            {(forecast) => <ForecastElement forecast={forecast()} />}
+            {(forecast, index) => (
+              <ForecastElement forecast={forecast()} index={index} />
+            )}
           </Index>
         </div>
       </Card.Body>
