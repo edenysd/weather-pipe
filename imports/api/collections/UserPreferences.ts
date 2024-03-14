@@ -25,10 +25,7 @@ export const getNextOrderValue = ({ userId }) => {
     .fetch()
     .map((preferemce) => preferemce.order);
 
-  const nextOrderValue =
-    orderArr.reduce((a, b) => Math.max(a || 0, b || 0), {
-      order: 0,
-    }) + 1;
+  const nextOrderValue = orderArr.reduce((a, b) => Math.max(a, b), 0) + 1;
 
   return nextOrderValue;
 };
