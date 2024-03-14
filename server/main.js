@@ -6,6 +6,7 @@ import { startMethodAddLocation } from "/imports/api/methods/locations";
 import { createOWTimer } from "/imports/api/timers/OWTimer";
 import { publishLocationsDashboard } from "/imports/api/publications/locationsData";
 import { publishUserPreferencesDashboard } from "/imports/api/publications/userPreferences";
+import { startMethodsUserPreferences } from "/imports/api/methods/userPreferences";
 
 Meteor.startup(async () => {
   startMethodMap();
@@ -13,4 +14,5 @@ Meteor.startup(async () => {
   startMethodAddLocation();
   publishUserPreferencesDashboard();
   publishLocationsDashboard();
+  startMethodsUserPreferences();
 });
