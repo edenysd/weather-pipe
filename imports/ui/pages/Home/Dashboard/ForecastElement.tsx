@@ -20,6 +20,9 @@ export const ForecastElement = ({ forecast, index }) => {
       </div>
       <img
         class="aspect-square w-12 sm:w-16"
+        style={{
+          filter: "drop-shadow(2px 2px 5px #0004)",
+        }}
         src={`https://openweathermap.org/img/wn/${forecast.icon}@4x.png`}
       ></img>
       <div class="flex flex-col items-center font-medium text-sm sm:text-base bg-slate-500 text-white rounded-md gap-1 p-1">

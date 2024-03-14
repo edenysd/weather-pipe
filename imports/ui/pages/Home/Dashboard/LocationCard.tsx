@@ -46,6 +46,9 @@ export const LocationCard = ({ preference }) => {
               src={`https://openweathermap.org/img/wn/${
                 preference().current?.weather[0].icon
               }@4x.png`}
+              style={{
+                filter: "drop-shadow(2px 2px 5px #0004)",
+              }}
             />
             <div class="flex flex-col items-center">
               <div class="text-3xl font-mono font-semibold tracking-tighter">
