@@ -19,7 +19,10 @@ export const DashboardLocationsList = (props) => {
     setIsReady(
       locationsSubscription.ready() && preferencesSubscription.ready()
     );
+
     const locations = LocationsData.find().fetch();
+    if (!locations.length) return;
+
     const locationsMap = {};
     locations.forEach((location) => {
       locationsMap[location._id] = location;
