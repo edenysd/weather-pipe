@@ -14,7 +14,7 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
   let overlayRef = null;
 
   createEffect(() => {
-    const coordinate = [lat(), lng()];
+    const coordinate = [lng(), lat()];
     overlayRef?.setPosition(coordinate);
   });
 
@@ -55,8 +55,8 @@ export const OLMapDashboard = ({ lat, lng, setLat, setLng }) => {
       if (event.pixel) {
         var coordinate = event.coordinate;
         overlayRef.setPosition(coordinate);
-        setLat(coordinate[0]);
-        setLng(coordinate[1]);
+        setLat(coordinate[1]);
+        setLng(coordinate[0]);
       } else {
         overlayRef.setPosition(undefined);
       }
