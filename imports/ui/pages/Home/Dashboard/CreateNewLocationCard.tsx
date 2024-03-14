@@ -38,7 +38,7 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
     }
     setLoading(true);
     try {
-      const response = await Meteor.callAsync("add-location", {
+      await Meteor.callAsync("add-location", {
         name: locationName().value,
         lat: lat(),
         lng: lng(),
@@ -53,7 +53,7 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
     }
   };
   return (
-    <div class="flex overflow-visible">
+    <div class="flex w-full overflow-visible">
       <Card.Root
         class={cx(
           "flex flex-col w-full transition-all duration-300 h-fit shadow-sm",
@@ -67,6 +67,10 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
           <Card.Header class="p-4">
             <Card.Title>Add new location</Card.Title>
           </Card.Header>
+          <Card.Description class="pl-4">
+            Mark the location you want to track <b>on the map</b> and give it a
+            name
+          </Card.Description>
           <Card.Body class="grid grid-cols-1 xl:grid-cols-2 gap-4 p-4">
             <div class="min-h-[400px]">
               <OLMapDashboard
@@ -89,7 +93,7 @@ export const CreateNewLocationCard = ({ draftNewLocation }) => {
                         value: e.target.value,
                       }))
                     }
-                    placeholder="Enter location name"
+                    placeholder="This name is for informational purposes only."
                   />
                   <FormLabel class="text-red-800">
                     {locationName().error}
