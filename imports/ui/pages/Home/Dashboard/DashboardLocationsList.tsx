@@ -2,6 +2,8 @@ import { Show, createSignal, onCleanup } from "solid-js";
 import { Tracker } from "meteor/tracker";
 import { LocationsData } from "../../../../api/collections/LocationsData";
 import { UserPreferences } from "../../../../api/collections/UserPreferences";
+import { Index } from "solid-js";
+import { LocationCard } from "./LocationCard";
 
 export const DashboardLocationsList = (props) => {
   const locationsSubscription = Meteor.subscribe("dashboard-locations");
@@ -40,7 +42,7 @@ export const DashboardLocationsList = (props) => {
         lastUpdate: locationsMap[rawPreference.locationId]?.lastUpdate,
       };
     });
-    console.log(preferences);
+
     setProcessedPreferences(preferences);
   });
   onCleanup(() => {
@@ -49,7 +51,7 @@ export const DashboardLocationsList = (props) => {
   });
 
   return (
-    <div class="w-full h-full flex flex-col items-center p-4 gap-4">
+    <div class="w-full h-full flex flex-col items-center">
       <Show
         when={isReady()}
         fallback={
@@ -63,9 +65,24 @@ export const DashboardLocationsList = (props) => {
       >
         <Show
           when={processedPreferences().length}
-          fallback={<div>My Content</div>}
+          fallback={
+            <h1 class="text-xl font-light">
+              ☝️ Add new locations to keep track ☝️
+            </h1>
+          }
         >
-          ADD LOCATION
+          <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-4">
+            <Index
+              each={processedPreferences()}
+              fallback={
+                <h1 class="text-xl font-light">
+                  ☝️ Add new locations to keep track ☝️
+                </h1>
+              }
+            >
+              {(preference) => <LocationCard preference={preference} />}
+            </Index>
+          </div>
         </Show>
       </Show>
     </div>
