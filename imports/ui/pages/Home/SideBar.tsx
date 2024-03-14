@@ -21,7 +21,7 @@ export const SideBar = (props) => {
     <>
       <aside
         id="default-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 border-r-2"
+        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0 border-r-2"
         aria-label="Sidebar"
       >
         <div class="h-full py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -53,7 +53,7 @@ export const SideBar = (props) => {
           </SegmentGroup.Root>
         </div>
       </aside>
-      <div class="sm:ml-64 h-full relative flex flex-col">{props.children}</div>
+      <div class="lg:ml-64 h-full relative flex flex-col">{props.children}</div>
     </>
   );
 };
@@ -65,7 +65,7 @@ export const SideBarToggle = () => {
       data-drawer-toggle="default-sidebar"
       aria-controls="default-sidebar"
       type="button"
-      class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
     >
       <span class="sr-only">Open sidebar</span>
       <svg

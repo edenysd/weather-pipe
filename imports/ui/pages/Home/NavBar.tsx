@@ -8,7 +8,7 @@ export const NavBar = () => {
   const navigate = useNavigate();
   return (
     <nav class="bg-gray-50 dark:bg-gray-700 border-b-2 h-fit">
-      <div class="w-full px-4 py-3 mx-auto flex justify-between sm:justify-end">
+      <div class="w-full px-4 py-3 mx-auto flex justify-between lg:justify-end">
         <SideBarToggle />
         <div class="flex items-center">
           <Menu.Root>
