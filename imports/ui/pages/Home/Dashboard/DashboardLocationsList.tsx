@@ -87,7 +87,6 @@ export const DashboardLocationsList = (props) => {
                   isFirst={index == 0}
                   isLast={index == processedPreferences().length - 1}
                   handleRemove={() => {
-                    console.log(preference());
                     Meteor.call("remove-preference", { id: preference()._id });
                   }}
                   handleMove={(move) => {

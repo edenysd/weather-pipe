@@ -37,12 +37,12 @@ export const LocationCard = ({
 
     const forecastDays = [];
     for (let i = 0; i < forecast3H.length; i += 8) {
-      forecastDays.push(forecast3H[i]);
+        forecastDays.push(forecast3H[i]);
     }
 
     setForecastedList(forecastDays);
   });
-  console.log(isFirst, isLast);
+
   return (
     <Card.Root maxW="full" class="shadow-sm border-[1px]">
       <Card.Header class="flex flex-row justify-between p-4">

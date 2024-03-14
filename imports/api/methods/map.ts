@@ -1,6 +1,6 @@
 import { check } from "meteor/check";
 import axios from "axios";
-let loadedTiles = 0;
+
 export const startMethodMap = () => {
   Meteor.methods({
     async map({ tileCoord, layer }) {
@@ -25,7 +25,6 @@ export const startMethodMap = () => {
       this.unblock();
 
       try {
-        console.log("Loaded Tiles", loadedTiles++);
         const response = await axios.get(
           `https://tile.openweathermap.org/map/${layer}/${tileCoord[0]}/${tileCoord[1]}/${tileCoord[2]}.png?appid=${Meteor.settings.OW_API_KEY}`,
           {
