@@ -36,8 +36,20 @@ export const LocationCard = ({
     }));
 
     const forecastDays = [];
-    for (let i = 0; i < forecast3H.length; i += 8) {
+    for (let i = 0; i < forecast3H.length; i++) {
+      if (i % 8 == 0) {
         forecastDays.push(forecast3H[i]);
+      } else {
+        const curIndex = Math.floor(i / 8);
+        forecastDays[curIndex].minTemp = Math.min(
+          forecastDays[curIndex].minTemp,
+          forecast3H[i].minTemp
+        );
+        forecastDays[curIndex].maxTemp = Math.max(
+          forecastDays[curIndex].maxTemp,
+          forecast3H[i].maxTemp
+        );
+      }
     }
 
     setForecastedList(forecastDays);
