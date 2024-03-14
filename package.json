@@ -12,6 +12,7 @@
     "@babel/runtime": "^7.24.0",
     "@solidjs/router": "^0.13.0",
     "axios": "^1.6.7",
+    "expect": "^29.7.0",
     "flowbite": "^2.3.0",
     "js-cookie": "^3.0.5",
     "meteor-node-stubs": "^1.2.7",
