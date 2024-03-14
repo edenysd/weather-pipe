@@ -45,6 +45,7 @@ export const DashboardLocationsList = (props) => {
 
     setProcessedPreferences(preferences);
   });
+
   onCleanup(() => {
     locationsSubscription.stop();
     preferencesSubscription.stop();
@@ -80,7 +81,23 @@ export const DashboardLocationsList = (props) => {
                 </h1>
               }
             >
-              {(preference) => <LocationCard preference={preference} />}
+              {(preference, index) => (
+                <LocationCard
+                  preference={preference}
+                  isFirst={index == 0}
+                  isLast={index == processedPreferences().length - 1}
+                  handleRemove={() => {
+                    console.log(preference());
+                    Meteor.call("remove-preference", { id: preference()._id });
+                  }}
+                  handleMove={(move) => {
+                    Meteor.call("move-preference", {
+                      id: preference()._id,
+                      move,
+                    });
+                  }}
+                />
+              )}
             </Index>
           </div>
         </Show>
