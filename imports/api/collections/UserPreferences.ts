@@ -9,7 +9,7 @@ UserPreferences.schema = new SimpleSchema({
   lng: { type: Number, defaultValue: 0 },
   userId: { type: String },
   locationId: { type: String, defaultValue: "" },
-  order: { type: Number, defaultValue: 0, optional: true },
+  order: { type: Number, defaultValue: 0 },
 });
 
 export const getNextOrderValue = ({ userId }) => {
