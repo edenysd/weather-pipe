@@ -1,4 +1,4 @@
-import { Show, createSignal, onCleanup } from "solid-js";
+import { Show, createEffect, createSignal, onCleanup } from "solid-js";
 import { Tracker } from "meteor/tracker";
 import { LocationsData } from "../../../../api/collections/LocationsData";
 import { UserPreferences } from "../../../../api/collections/UserPreferences";
@@ -80,13 +80,25 @@ export const DashboardLocationsList = (props) => {
                 </h1>
               }
             >
-              {(preference, index) => (
+              {(preference, index) => {
+                const [isFirst, setIsFirst] = createSignal(index == 0);
+                const [isLast, setIsLast] = createSignal(
+                  index == processedPreferences().length - 1
+                );
+
+                createEffect(() => {
+                  setIsFirst(index == 0);
+                  setIsLast(index == processedPreferences().length - 1);
+                });
+                return (
                   <LocationCard
                     preference={preference}
-                  isFirst={index == 0}
-                  isLast={index == processedPreferences().length - 1}
+                    isFirst={isFirst}
+                    isLast={isLast}
                     handleRemove={() => {
-                    Meteor.call("remove-preference", { id: preference()._id });
+                      Meteor.call("remove-preference", {
+                        id: preference()._id,
+                      });
                     }}
                     handleMove={(move) => {
                       Meteor.call("move-preference", {
@@ -95,7 +107,8 @@ export const DashboardLocationsList = (props) => {
                       });
                     }}
                   />
-              )}
+                );
+              }}
             </Index>
           </div>
         </Show>

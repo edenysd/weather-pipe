@@ -77,7 +77,7 @@ export const LocationCard = ({
                 <Menu.Item
                   class={cx(
                     "flex flex-row gap-2 text-base",
-                    isFirst
+                    isFirst()
                       ? "pointer-events-none text-gray-400 fill-gray-400"
                       : ""
                   )}
@@ -90,7 +90,7 @@ export const LocationCard = ({
                 <Menu.Item
                   class={cx(
                     "flex flex-row gap-2 text-base",
-                    isLast
+                    isLast()
                       ? "pointer-events-none text-gray-400 fill-gray-400"
                       : ""
                   )}
