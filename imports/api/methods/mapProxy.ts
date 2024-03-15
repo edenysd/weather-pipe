@@ -1,9 +1,9 @@
 import { check } from "meteor/check";
 import axios from "axios";
 
-export const startMethodMap = () => {
+export const startMethodMapProxy = () => {
   Meteor.methods({
-    async map({ tileCoord, layer }) {
+    async ["map-proxy"]({ tileCoord, layer }) {
       if (!this.userId) {
         throw new Meteor.Error(
           "not-permited",

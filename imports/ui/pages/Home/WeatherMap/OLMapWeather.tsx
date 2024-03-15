@@ -37,7 +37,7 @@ export const OLMapDashboard = ({ layer }) => {
         url: "{x}{y}{z}",
         cacheSize: 3000,
         tileLoadFunction(tile, src) {
-          Meteor.callAsync("map", {
+          Meteor.callAsync("map-proxy", {
             tileCoord: tile.tileCoord,
             layer: layerRef,
           })
