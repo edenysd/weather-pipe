@@ -23,7 +23,6 @@ export const DashboardLocationsList = (props) => {
     );
 
     const locations = LocationsData.find().fetch();
-    if (!locations.length) return;
 
     const locationsMap = {};
     locations.forEach((location) => {
@@ -42,7 +41,7 @@ export const DashboardLocationsList = (props) => {
         lastUpdate: locationsMap[rawPreference.locationId]?.lastUpdate,
       };
     });
-
+    if (!locations.length && preferences.length > 0) return;
     setProcessedPreferences(preferences);
   });
 
@@ -82,20 +81,20 @@ export const DashboardLocationsList = (props) => {
               }
             >
               {(preference, index) => (
-                <LocationCard
-                  preference={preference}
+                  <LocationCard
+                    preference={preference}
                   isFirst={index == 0}
                   isLast={index == processedPreferences().length - 1}
-                  handleRemove={() => {
+                    handleRemove={() => {
                     Meteor.call("remove-preference", { id: preference()._id });
-                  }}
-                  handleMove={(move) => {
-                    Meteor.call("move-preference", {
-                      id: preference()._id,
-                      move,
-                    });
-                  }}
-                />
+                    }}
+                    handleMove={(move) => {
+                      Meteor.call("move-preference", {
+                        id: preference()._id,
+                        move,
+                      });
+                    }}
+                  />
               )}
             </Index>
           </div>
