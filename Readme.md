@@ -3,6 +3,18 @@
 ## Description
 This project is a web application designed to provide users with interactive maps displaying various weather-related data. It includes features such as user authentication, dashboard customization, and real-time weather updates.
 
+## Getting Started
+To run the project locally, follow these steps:
+1. Clone the repository.
+2. Install Meteor if you haven't already.
+3. Install dependencies 
+4. Start the frontend and backend servers.
+5. Access the application via the provided URL.
+6. Set the environment variable METEOR_SETTINGS with your Open Weather API key. For example:
+```
+METEOR_SETTINGS='{ "OW_API_KEY": "xxxxxxxxxxxxxxxxxxxxxxxxx" }' npm start
+```
+   
 ## Technologies Used
 
 ### Frontend
